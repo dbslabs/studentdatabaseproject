@@ -1,0 +1,91 @@
+Student Database Project
+Instructions, Accessible Data Format & Query Solution Key
+
+1. Project Overview & Table Setup
+This project involves creating a student relational database, entering student records, and executing targeted queries. Follow the accessibility standards and field specifications below to set up your table.
+
+Field Specifications:
+- StudentID | Number (Integer) | Unique Student Identification Number | Primary Key: Yes
+- LastName | Short Text | Student Last Name | Primary Key: No
+- FirstName | Short Text | Student First Name | Primary Key: No
+- DateOfBirth | Date/Time | Format: YYYY-MM-DD or Short Date | Primary Key: No
+- MailingAddress | Short Text / Long Text | Full address (Street, City, State, ZIP) | Primary Key: No
+- STEMStudent | Short Text or Yes/No | 'Y' / 'N' or Boolean Checkbox | Primary Key: No
+- Hobbies | Short Text / Long Text | List of student hobbies and interests | Primary Key: No
+
+2. Accessibility Guidelines for NVDA & Screen Reader Users
+- Forms View over Table View: Standard datasheet grid views can be difficult to navigate with screen readers. Creating a form or switching to Form View (Right-click table name -> 'Edit' or open via Form Design) simplifies data entry field-by-field.
+- Tab Key Navigation: Press the Tab key to move forward efficiently between input fields. Press Shift + Tab to move backward.
+- Section Navigation (F6): Use F6 to cycle focus between major sections of the interface (Navigation Pane, Main Workspace, and Status Bar).
+- Return to First Field (Ctrl + Home): Press Ctrl + Home at any time to return focus directly to the first field or record.
+- Table Grid Navigation (Ctrl + Alt + Arrow Keys): If navigating in grid view, use Ctrl + Alt + Arrow keys to move smoothly up, down, left, and right across cells.
+
+3. Raw Student Data (Easy Cut & Paste)
+The block below contains the raw record data formatted in standard CSV (Comma-Separated Values). You can easily copy and paste this entire block directly into a text file (students.txt), or copy/paste it straight into Microsoft Access / Excel import wizard.
+
+StudentID,LastName,FirstName,DateOfBirth,MailingAddress,STEMStudent,Hobbies
+1001,Anderson,Maya,2006-03-15,125 Oak Street Portland OR 97201,Y,Robotics chess podcasting
+1002,Chen,David,2005-07-22,456 Maple Avenue Seattle WA 98101,Y,Coding gaming swimming
+1003,Rodriguez,Sofia,2006-11-08,789 Pine Road Austin TX 78701,N,Painting music reading
+1004,Johnson,Marcus,2005-01-30,234 Birch Lane Chicago IL 60601,Y,Math competitions basketball drumming
+1005,Patel,Priya,2006-09-12,567 Cedar Court Boston MA 02101,Y,Science experiments yoga writing
+1006,Williams,Jordan,2005-05-25,890 Elm Drive Denver CO 80201,N,Theater debate hiking
+1007,Kim,Min-Jun,2006-12-03,345 Willow Street San Francisco CA 94101,Y,Engineering projects skateboarding cooking
+1008,Brown,Emma,2005-04-18,678 Spruce Avenue Miami FL 33101,N,Photography creative writing volunteering
+1009,Garcia,Carlos,2006-08-07,901 Aspen Road Phoenix AZ 85001,Y,Computer building soccer astronomy
+1010,Thompson,Aisha,2005-02-14,123 Redwood Lane Atlanta GA 30301,N,Dance graphic design gardening
+
+4. Database Queries & Solution Key
+
+Query 1: List all STEM students
+- Filter Criteria: STEMStudent = 'Y'
+- SQL Statement: SELECT StudentID, FirstName, LastName, STEMStudent FROM Students WHERE STEMStudent = 'Y';
+- Expected Query Output:
+  1001 – Maya Anderson
+  1002 – David Chen
+  1004 – Marcus Johnson
+  1005 – Priya Patel
+  1007 – Min-Jun Kim
+  1009 – Carlos Garcia
+
+Query 2: Students born in 2006
+- Filter Criteria: DateOfBirth BETWEEN #2006-01-01# AND #2006-12-31# (or Year([DateOfBirth]) = 2006)
+- SQL Statement: SELECT StudentID, FirstName, LastName, DateOfBirth FROM Students WHERE DateOfBirth BETWEEN #2006-01-01# AND #2006-12-31#;
+- Expected Query Output:
+  1001 – Maya Anderson (2006-03-15)
+  1003 – Sofia Rodriguez (2006-11-08)
+  1005 – Priya Patel (2006-09-12)
+  1007 – Min-Jun Kim (2006-12-03)
+  1009 – Carlos Garcia (2006-08-07)
+
+Query 3: Non-STEM students sorted alphabetically
+- Filter Criteria: STEMStudent = 'N', Sorted by LastName ASC, FirstName ASC
+- SQL Statement: SELECT StudentID, LastName, FirstName, STEMStudent FROM Students WHERE STEMStudent = 'N' ORDER BY LastName ASC, FirstName ASC;
+- Expected Query Output:
+  1008 – Brown, Emma
+  1003 – Rodriguez, Sofia
+  1010 – Thompson, Aisha
+  1006 – Williams, Jordan
+
+Query 4: Students with specific hobbies containing 'ing'
+- Filter Criteria: Hobbies LIKE '*ing*'
+- SQL Statement: SELECT StudentID, FirstName, LastName, Hobbies FROM Students WHERE Hobbies LIKE '*ing*';
+- Expected Query Output:
+  1001 – Maya Anderson (podcasting)
+  1002 – David Chen (Coding, gaming, swimming)
+  1003 – Sofia Rodriguez (Painting, reading)
+  1004 – Marcus Johnson (drumming)
+  1005 – Priya Patel (writing)
+  1006 – Jordan Williams (hiking)
+  1007 – Min-Jun Kim (Engineering, skateboarding, cooking)
+  1008 – Emma Brown (Photography, writing, volunteering)
+  1009 – Carlos Garcia (building)
+  1010 – Aisha Thompson (gardening)
+
+Query 5: Students from specific states (FL, CA, TX)
+- Filter Criteria: MailingAddress LIKE '* FL *' OR LIKE '* CA *' OR LIKE '* TX *'
+- SQL Statement: SELECT StudentID, FirstName, LastName, MailingAddress FROM Students WHERE MailingAddress LIKE '* FL *' OR LIKE '* CA *' OR LIKE '* TX *';
+- Expected Query Output:
+  1003 – Sofia Rodriguez (789 Pine Road Austin TX 78701)
+  1007 – Min-Jun Kim (345 Willow Street San Francisco CA 94101)
+  1008 – Emma Brown (678 Spruce Avenue Miami FL 33101)
